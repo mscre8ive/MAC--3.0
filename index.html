@@ -77,7 +77,6 @@
       flex: 1;
       min-width: 160px;
       height: 44px;
-      line-height: 48px; /* Making this slightly larger than height pushes text down */
       padding: 0 14px;
       font-size: 15px;
       border: 1.5px solid #d0d8d0;
@@ -186,7 +185,7 @@
     <input
       type="text"
       id="nameInput"
-      placeholder="MS CRE8IVE"
+      placeholder="Sulyman Muhammad Sodiq"
       maxlength="40"
       autocomplete="off"
       oninput="renderDP()"
@@ -213,14 +212,16 @@
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1080;
 
-  const BAND_TOP    = Math.round(0.162 * H);
-  const BAND_BOTTOM = Math.round(0.285 * H);
+  /*
+    PERFECTLY CALIBRATED FOR THE BANNER:
+    Starts at 210px down, ends at 430px down.
+  */
+  const BAND_TOP    = 210;
+  const BAND_BOTTOM = 430;
   const BAND_MID    = Math.round((BAND_TOP + BAND_BOTTOM) / 2);
   const BAND_H      = BAND_BOTTOM - BAND_TOP;
 
   const flyer = new Image();
-  
-  // FIX #2: Enable cross-origin usage for canvas safety on live servers
   flyer.crossOrigin = "anonymous"; 
 
   flyer.onload = () => {
@@ -234,46 +235,53 @@
     ctx.font = 'bold 36px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('Place official_flyer.jpg in the same folder', W / 2, H / 2);
+    ctx.fillText('Could not load background image.', W / 2, H / 2);
   };
 
-  /*
-    FIX #1: Renamed the source file string to 'official_flyer.jpg' 
-    (Make sure you change your physical filename to lowercase and use underscores!)
-  */
-  flyer.src = 'official_flyer.jpg';
+  // Keep this exact string matching your file name on GitHub!
+  flyer.src = 'OFFICIAL FLYER.jpg';
 
   function fitFont(text, maxW, maxH) {
-    let size = Math.floor(maxH * 0.60);
-    ctx.font = `900 ${size}px "Arial Black", Arial, sans-serif`;
-    while (ctx.measureText(text).width > maxW && size > 22) {
+    // A scale factor of 0.45 fits up to 3 long names elegantly inside the block
+    let size = Math.floor(maxH * 0.45); 
+    ctx.font = `700 ${size}px "Segoe UI", Arial, sans-serif`;
+    while (ctx.measureText(text).width > maxW && size > 24) {
       size -= 2;
-      ctx.font = `900 ${size}px "Arial Black", Arial, sans-serif`;
+      ctx.font = `700 ${size}px "Segoe UI", Arial, sans-serif`;
     }
     return size;
   }
 
   function renderDP() {
     const raw  = document.getElementById('nameInput').value.trim();
-    const name = (raw || 'MS CRE8IVE').toUpperCase();
+    
+    // Default placeholder matching your exact example
+    const name = raw || 'Sulyman Muhammad Sodiq'; 
 
     ctx.clearRect(0, 0, W, H);
     ctx.drawImage(flyer, 0, 0, W, H);
 
-    const maxW = W * 0.84;
+    // Margins around the name block
+    const maxW = W * 0.86; 
     fitFont(name, maxW, BAND_H);
 
-    ctx.textAlign      = 'center';
-    ctx.textBaseline   = 'middle';
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
 
-    ctx.shadowColor   = 'rgba(0,0,0,0.40)';
-    ctx.shadowBlur    = 8;
-    ctx.shadowOffsetX = 3;
-    ctx.shadowOffsetY = 3;
+    // Soft drop shadow to mirror professional typography layering
+    ctx.shadowColor   = 'rgba(0,0,0,0.15)';
+    ctx.shadowBlur    = 4;
+    ctx.shadowOffsetX = 1;
+    ctx.shadowOffsetY = 2;
 
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(name, W / 2, BAND_MID);
+    
+    /* Fine-tuned rendering: Adding 4 pixels to the Y axis 
+      offsets the geometric font center so it balances perfectly visually.
+    */
+    ctx.fillText(name, W / 2, BAND_MID + 4);
 
+    // Reset properties for subsequent clean updates
     ctx.shadowColor   = 'transparent';
     ctx.shadowBlur    = 0;
     ctx.shadowOffsetX = 0;
@@ -281,15 +289,14 @@
   }
 
   function downloadDP() {
-    const raw  = document.getElementById('nameInput').value.trim() || 'MS_CRE8IVE';
+    const raw  = document.getElementById('nameInput').value.trim() || 'Sulyman_Muhammad_Sodiq';
     renderDP();
-    const link      = document.createElement('a');
-    link.download   = 'MAC3_DP_' + raw.replace(/\s+/g, '_') + '.png';
-    link.href       = canvas.toDataURL('image/png');
+    const link    = document.createElement('a');
+    link.download = 'MAC3_DP_' + raw.replace(/\s+/g, '_') + '.png';
+    link.href     = canvas.toDataURL('image/png');
     link.click();
   }
 
-  // FIX #3: Ensure initialization waits for window loading
   window.onload = () => {
     renderDP();
   };
