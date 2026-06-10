@@ -212,19 +212,20 @@
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1080;
 
-  /*
-    Green band position on the 1080×1080 flyer:
-    Top edge  ≈ 16.2% → 175px
-    Bottom edge ≈ 28.5% → 308px
-    Mid       ≈ 241px
-  */
   const BAND_TOP    = Math.round(0.162 * H);
   const BAND_BOTTOM = Math.round(0.285 * H);
   const BAND_MID    = Math.round((BAND_TOP + BAND_BOTTOM) / 2);
   const BAND_H      = BAND_BOTTOM - BAND_TOP;
 
   const flyer = new Image();
-  flyer.onload = () => renderDP();
+  
+  // FIX #2: Enable cross-origin usage for canvas safety on live servers
+  flyer.crossOrigin = "anonymous"; 
+
+  flyer.onload = () => {
+    renderDP();
+  };
+  
   flyer.onerror = () => {
     ctx.fillStyle = '#1a6b2e';
     ctx.fillRect(0, 0, W, H);
@@ -232,15 +233,14 @@
     ctx.font = 'bold 36px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('Place OFFICIAL_FLYER.jpg in the same folder', W / 2, H / 2);
+    ctx.fillText('Place official_flyer.jpg in the same folder', W / 2, H / 2);
   };
 
   /*
-    ⚠️ IMPORTANT:
-    Place OFFICIAL_FLYER.jpg in the SAME folder as this HTML file.
-    The line below loads it by filename — no server needed when opened locally.
+    FIX #1: Renamed the source file string to 'official_flyer.jpg' 
+    (Make sure you change your physical filename to lowercase and use underscores!)
   */
-  flyer.src = 'OFFICIAL_FLYER.jpg';
+  flyer.src = 'official_flyer.jpg';
 
   function fitFont(text, maxW, maxH) {
     let size = Math.floor(maxH * 0.60);
@@ -262,10 +262,9 @@
     const maxW = W * 0.84;
     fitFont(name, maxW, BAND_H);
 
-    ctx.textAlign     = 'center';
-    ctx.textBaseline  = 'middle';
+    ctx.textAlign      = 'center';
+    ctx.textBaseline   = 'middle';
 
-    /* Drop shadow for legibility */
     ctx.shadowColor   = 'rgba(0,0,0,0.40)';
     ctx.shadowBlur    = 8;
     ctx.shadowOffsetX = 3;
@@ -288,6 +287,11 @@
     link.href       = canvas.toDataURL('image/png');
     link.click();
   }
+
+  // FIX #3: Ensure initialization waits for window loading
+  window.onload = () => {
+    renderDP();
+  };
 </script>
 
 </body>
