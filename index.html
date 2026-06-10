@@ -3,267 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MAC 3.0 DP Generator | MSSN FUTMINNA</title>
+  <title>MAC 3.0 — DP Generator | MSSN FUTMINNA</title>
   <style>
-    /* modern, fluid design parameters */
-    :root {
-      --brand-green-dark: #114b20;
-      --brand-green-med: #1a6b2e;
-      --brand-green-pale: #e8f5ee;
-      --glass-base: rgba(255, 255, 255, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.6);
-      --glass-shadow: 0 10px 30px -5px rgba(26, 107, 46, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
-      --text-main: #1f2937;
-      --text-muted: #6b7280;
-    }
-
-    /* modern, scalable font stack */
-    @font-face {
-      font-family: 'Geist';
-      src: url('https://assets.codepen.io/605876/GeistVF.ttf') format('truetype');
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       background: #f0f4f0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1.5rem 1rem;
-      color: var(--text-main);
     }
 
-    .glass-card {
-      background: var(--glass-base);
-      backdrop-filter: blur(25px) saturate(210%);
-      -webkit-backdrop-filter: blur(25px) saturate(210%);
-      border: 1px solid var(--glass-border);
-      border-radius: 28px;
-      box-shadow: var(--glass-shadow);
-      padding: 2.25rem 2rem;
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 2rem 1.75rem;
       width: 100%;
-      max-width: 540px;
+      max-width: 560px;
     }
 
     /* Header */
     .header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 2rem;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5ebe5;
     }
-    
     .header-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--brand-green-pale);
-      border-radius: 16px;
+      width: 44px;
+      height: 44px;
+      background: #1a6b2e;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      border: 1px solid rgba(26, 107, 46, 0.2);
     }
-    
-    .header-icon svg { width: 28px; height: 28px; fill: var(--brand-green-med); }
-    
+    .header-icon svg { width: 24px; height: 24px; fill: #fff; }
     .header-text h1 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: -0.01em;
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.2;
     }
-    
     .header-text p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
+      font-size: 13px;
+      color: #666;
       margin-top: 2px;
     }
 
-    .badge {
-      display: inline-block;
-      background: var(--brand-green-med);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 800;
-      border-radius: 100px;
-      padding: 3px 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Input & Download Layout */
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
+    /* Input */
     label {
       display: block;
-      font-size: 0.88rem;
+      font-size: 13px;
       font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 8px;
+      color: #333;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
     }
-
     .input-group {
       display: flex;
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
     }
-
     input[type="text"] {
       flex: 1;
-      height: 50px;
-      padding: 0 16px;
-      font-size: 1rem;
-      font-weight: 500;
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
+      min-width: 160px;
+      height: 44px;
+      padding: 0 14px;
+      font-size: 15px;
+      border: 1.5px solid #d0d8d0;
+      border-radius: 10px;
       outline: none;
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.6);
-      transition: all 0.2s;
+      color: #111;
+      background: #f8faf8;
+      transition: border-color 0.2s;
     }
-
     input[type="text"]:focus {
-      border-color: var(--brand-green-med);
+      border-color: #1a6b2e;
       background: #fff;
-      box-shadow: 0 0 0 4px rgba(26, 107, 46, 0.1);
     }
-
-    input[type="text"]::placeholder { color: #9ca3af; }
+    input[type="text"]::placeholder { color: #aaa; }
 
     .btn-download {
-      height: 50px;
-      padding: 0 24px;
-      background: var(--brand-green-med);
+      height: 44px;
+      padding: 0 20px;
+      background: #1a6b2e;
       color: #fff;
       border: none;
-      border-radius: 14px;
-      font-size: 1rem;
+      border-radius: 10px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
       white-space: nowrap;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background 0.2s, transform 0.1s;
     }
+    .btn-download:hover { background: #145523; }
+    .btn-download:active { transform: scale(0.97); }
+    .btn-download svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .btn-download:hover { background: var(--brand-green-dark); }
-    .btn-download:active { transform: scale(0.98); }
-    .btn-download svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* Canvas preview area */
-    .preview-container {
-      margin-top: 2rem;
-    }
-
-    .preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
+    /* Canvas preview */
     .preview-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
     }
-
     .preview-wrap {
-      border-radius: 20px;
+      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--glass-border);
+      border: 1px solid #e0e8e0;
       background: #e8ede8;
+      margin-bottom: 1rem;
       position: relative;
     }
-
     canvas {
       display: block;
       width: 100%;
       height: auto;
     }
 
-    /* dynamic character counter mirroring the overall progress feeling */
-    .char-counter {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    
-    .char-counter strong { color: var(--brand-green-med); font-weight: 600; }
-
     /* Footer note */
     .note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: #999;
       text-align: center;
-      margin-top: 1.5rem;
+      line-height: 1.6;
     }
-    .note strong { color: var(--brand-green-med); font-weight: 600; }
+    .note strong { color: #1a6b2e; }
 
-    /* Breakpoint Handling for device adaptive */
+    /* Badge */
+    .badge {
+      display: inline-block;
+      background: #e8f5ee;
+      color: #1a6b2e;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 3px 8px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.3px;
+    }
+
     @media (max-width: 480px) {
-      .glass-card { padding: 1.75rem 1.25rem; border-radius: 24px; }
-      .header { margin-bottom: 1.5rem; }
-      .input-group { flex-direction: column; gap: 10px; }
-      input[type="text"] { width: 100%; }
+      .card { padding: 1.5rem 1.25rem; }
+      .input-group { flex-direction: column; }
       .btn-download { width: 100%; justify-content: center; }
+      input[type="text"] { width: 100%; }
     }
   </style>
 </head>
 <body>
 
-<div class="glass-card">
-  
+<div class="card">
+
   <div class="header">
     <div class="header-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
     </div>
     <div class="header-text">
-      <h1>MAC 3.0 DP Engine <span class="badge">MSSN FUTMINNA</span></h1>
-      <p>Muslim Academic Conference · Saturday, June 13, 2026</p>
+      <h1>MAC 3.0 DP Generator <span class="badge">MSSN FUTMINNA</span></h1>
+      <p>Muslim Academic Conference · Saturday, 13th June 2026</p>
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="nameInput">Enter Full Name (Max 35 Characters)</label>
-    <div class="input-group">
-      <input
-        type="text"
-        id="nameInput"
-        placeholder="Sulyman Muhammad Sodiq"
-        maxlength="35"
-        autocomplete="off"
-        oninput="updateUI()"
-      />
-      <button class="btn-download" onclick="downloadDP()">
-        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download
-      </button>
-    </div>
+  <label for="nameInput">Your Full Name</label>
+  <div class="input-group">
+    <input
+      type="text"
+      id="nameInput"
+      placeholder="Sulyman Muhammad Sodiq"
+      maxlength="40"
+      autocomplete="off"
+      oninput="renderDP()"
+    />
+    <button class="btn-download" onclick="downloadDP()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download
+    </button>
   </div>
 
-  <div class="preview-container">
-    <div class="preview-header">
-      <p class="preview-label">Live Preview</p>
-      <p class="char-counter"><strong id="charCount">22</strong> / 35 characters</p>
-    </div>
-    <div class="preview-wrap">
-      <canvas id="dpCanvas" width="1080" height="1080"></canvas>
-    </div>
+  <p class="preview-label">Preview</p>
+  <div class="preview-wrap">
+    <canvas id="dpCanvas" width="1080" height="1080"></canvas>
   </div>
 
   <p class="note">
-    Generated image renders as a crisp, optimized <strong>1080 × 1080 PNG</strong> copy.
+    Exports as <strong>1080 × 1080 PNG</strong> &mdash; ready for WhatsApp, Instagram, Twitter/X &amp; LinkedIn.
   </p>
 
 </div>
@@ -273,7 +212,7 @@
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1080;
 
-  // Calibrated positions for the official_flyer.jpg asset configuration
+  // Exact positions calibrated for your green flyer block
   const BAND_TOP    = 210;
   const BAND_BOTTOM = 430;
   const BAND_MID    = Math.round((BAND_TOP + BAND_BOTTOM) / 2);
@@ -287,20 +226,23 @@
   };
   
   flyer.onerror = () => {
+    // If the file path completely breaks, check if the file is named "OFFICIAL FLYER (1).jpg" on github
     ctx.fillStyle = '#1a6b2e';
     ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 36px sans-serif';
+    ctx.font = 'bold 32px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('File official_flyer.jpg not found.', W / 2, H / 2);
+    ctx.fillText('Please make sure your background flyer file name', W / 2, H / 2 - 30);
+    ctx.fillText('matches exactly with the script parameters.', W / 2, H / 2 + 20);
   };
 
-  // Re-referencing the explicit name structure configuration
+  /* 👉 ACTION REQUIRED: Change this string if your file in GitHub has a 
+    different name like 'OFFICIAL FLYER (1).jpg' or 'official_flyer.jpg'
+  */
   flyer.src = 'official_flyer.jpg';
 
   function fitFont(text, maxW, maxH) {
-    // 0.42 is the dynamic scale factor optimized for the banner geometry
     let size = Math.floor(maxH * 0.42); 
     ctx.font = `700 ${size}px "Segoe UI", Arial, sans-serif`;
     while (ctx.measureText(text).width > maxW && size > 24) {
@@ -310,17 +252,13 @@
     return size;
   }
 
-  function updateUI() {
-    renderDP();
-    const input = document.getElementById('nameInput');
-    document.getElementById('charCount').innerText = input.value.length || 22;
-  }
-
   function renderDP() {
     const raw  = document.getElementById('nameInput').value.trim();
     const name = raw || 'Sulyman Muhammad Sodiq'; 
 
     ctx.clearRect(0, 0, W, H);
+    
+    // Draw background image template
     ctx.drawImage(flyer, 0, 0, W, H);
 
     const maxW = W * 0.86; 
@@ -329,6 +267,7 @@
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
 
+    // Add typography drop shadow
     ctx.shadowColor   = 'rgba(0,0,0,0.12)';
     ctx.shadowBlur    = 4;
     ctx.shadowOffsetX = 1;
@@ -336,10 +275,10 @@
 
     ctx.fillStyle = '#ffffff';
     
-    // Fine-tuned Typography Baseline Balancing + 4
+    // Render name directly inside the green shape baseline
     ctx.fillText(name, W / 2, BAND_MID + 4);
 
-    // Context Clean-down Pipeline
+    // Clean up canvas states
     ctx.shadowColor   = 'transparent';
     ctx.shadowBlur    = 0;
     ctx.shadowOffsetX = 0;
@@ -356,7 +295,7 @@
   }
 
   window.onload = () => {
-    updateUI();
+    renderDP();
   };
 </script>
 
