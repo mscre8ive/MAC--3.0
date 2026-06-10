@@ -212,10 +212,7 @@
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1080;
 
-  /*
-    PERFECTLY CALIBRATED FOR THE BANNER:
-    Starts at 210px down, ends at 430px down.
-  */
+  // Exact positions calibrated for your green flyer block
   const BAND_TOP    = 210;
   const BAND_BOTTOM = 430;
   const BAND_MID    = Math.round((BAND_TOP + BAND_BOTTOM) / 2);
@@ -229,21 +226,24 @@
   };
   
   flyer.onerror = () => {
+    // If the file path completely breaks, check if the file is named "OFFICIAL FLYER (1).jpg" on github
     ctx.fillStyle = '#1a6b2e';
     ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 36px Arial';
+    ctx.font = 'bold 32px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('Could not load background image.', W / 2, H / 2);
+    ctx.fillText('Please make sure your background flyer file name', W / 2, H / 2 - 30);
+    ctx.fillText('matches exactly with the script parameters.', W / 2, H / 2 + 20);
   };
 
-  // Keep this exact string matching your file name on GitHub!
+  /* 👉 ACTION REQUIRED: Change this string if your file in GitHub has a 
+    different name like 'OFFICIAL FLYER (1).jpg' or 'official_flyer.jpg'
+  */
   flyer.src = 'OFFICIAL FLYER.jpg';
 
   function fitFont(text, maxW, maxH) {
-    // A scale factor of 0.45 fits up to 3 long names elegantly inside the block
-    let size = Math.floor(maxH * 0.45); 
+    let size = Math.floor(maxH * 0.42); 
     ctx.font = `700 ${size}px "Segoe UI", Arial, sans-serif`;
     while (ctx.measureText(text).width > maxW && size > 24) {
       size -= 2;
@@ -254,34 +254,31 @@
 
   function renderDP() {
     const raw  = document.getElementById('nameInput').value.trim();
-    
-    // Default placeholder matching your exact example
     const name = raw || 'Sulyman Muhammad Sodiq'; 
 
     ctx.clearRect(0, 0, W, H);
+    
+    // Draw background image template
     ctx.drawImage(flyer, 0, 0, W, H);
 
-    // Margins around the name block
     const maxW = W * 0.86; 
     fitFont(name, maxW, BAND_H);
 
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
 
-    // Soft drop shadow to mirror professional typography layering
-    ctx.shadowColor   = 'rgba(0,0,0,0.15)';
+    // Add typography drop shadow
+    ctx.shadowColor   = 'rgba(0,0,0,0.12)';
     ctx.shadowBlur    = 4;
     ctx.shadowOffsetX = 1;
     ctx.shadowOffsetY = 2;
 
     ctx.fillStyle = '#ffffff';
     
-    /* Fine-tuned rendering: Adding 4 pixels to the Y axis 
-      offsets the geometric font center so it balances perfectly visually.
-    */
+    // Render name directly inside the green shape baseline
     ctx.fillText(name, W / 2, BAND_MID + 4);
 
-    // Reset properties for subsequent clean updates
+    // Clean up canvas states
     ctx.shadowColor   = 'transparent';
     ctx.shadowBlur    = 0;
     ctx.shadowOffsetX = 0;
