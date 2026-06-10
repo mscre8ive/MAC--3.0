@@ -5,206 +5,305 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAC 3.0 — DP Generator | MSSN FUTMINNA</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand-green-dark: #114b20;
+      --brand-green: #1a6b2e;
+      --brand-green-light: #e8f5ee;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --bg-gradient: linear-gradient(135deg, #f4f7f4 0%, #e6eee6 100%);
+      --card-shadow: 0 10px 30px -5px rgba(26, 107, 46, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
 
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f0f4f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-dark);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem 1rem;
+      padding: 1rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: auto;
     }
 
     .card {
       background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
       padding: 2rem 1.75rem;
-      width: 100%;
-      max-width: 560px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
     }
 
-    /* Header */
+    /* Header Styling */
     .header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e5ebe5;
+      gap: 16px;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid #e5e7eb;
     }
+    
     .header-icon {
-      width: 44px;
-      height: 44px;
-      background: #1a6b2e;
-      border-radius: 10px;
+      width: 48px;
+      height: 48px;
+      background: var(--brand-green);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(26, 107, 46, 0.2);
     }
-    .header-icon svg { width: 24px; height: 24px; fill: #fff; }
+    
+    .header-icon svg { 
+      width: 24px; 
+      height: 24px; 
+      fill: none; 
+      stroke: #fff; 
+      stroke-width: 2; 
+      stroke-linecap: round; 
+      stroke-linejoin: round; 
+    }
+    
     .header-text h1 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #111;
-      line-height: 1.2;
-    }
-    .header-text p {
-      font-size: 13px;
-      color: #666;
-      margin-top: 2px;
-    }
-
-    /* Input */
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 6px;
-      letter-spacing: 0.3px;
-    }
-    .input-group {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.025em;
       display: flex;
-      gap: 10px;
-      margin-bottom: 1.25rem;
+      align-items: center;
+      gap: 6px;
       flex-wrap: wrap;
     }
+    
+    .header-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--brand-green-light);
+      color: var(--brand-green);
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 2px 8px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Input & Interactive Layout Block */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+    }
+
     input[type="text"] {
       flex: 1;
-      min-width: 160px;
-      height: 44px;
-      padding: 0 14px;
-      font-size: 15px;
-      border: 1.5px solid #d0d8d0;
-      border-radius: 10px;
+      height: 48px;
+      padding: 0 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
       outline: none;
-      color: #111;
-      background: #f8faf8;
-      transition: border-color 0.2s;
+      color: var(--text-dark);
+      background: #f9fafb;
+      transition: all 0.2s ease;
     }
+
     input[type="text"]:focus {
-      border-color: #1a6b2e;
+      border-color: var(--brand-green);
       background: #fff;
+      box-shadow: 0 0 0 4px rgba(26, 107, 46, 0.12);
     }
-    input[type="text"]::placeholder { color: #aaa; }
+
+    input[type="text"]::placeholder { 
+      color: #9ca3af; 
+    }
 
     .btn-download {
-      height: 44px;
-      padding: 0 20px;
-      background: #1a6b2e;
+      height: 48px;
+      padding: 0 24px;
+      background: var(--brand-green);
       color: #fff;
       border: none;
-      border-radius: 10px;
-      font-size: 15px;
+      border-radius: 12px;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       white-space: nowrap;
-      transition: background 0.2s, transform 0.1s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(26, 107, 46, 0.15);
     }
-    .btn-download:hover { background: #145523; }
-    .btn-download:active { transform: scale(0.97); }
-    .btn-download svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* Canvas preview */
-    .preview-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
+    .btn-download:hover { 
+      background: var(--brand-green-dark);
+      box-shadow: 0 6px 16px rgba(26, 107, 46, 0.25);
+    }
+    
+    .btn-download:active { 
+      transform: scale(0.98); 
+    }
+    
+    .btn-download svg { 
+      width: 20px; 
+      height: 20px; 
+      stroke: currentColor; 
+      fill: none; 
+      stroke-width: 2.2; 
+      stroke-linecap: round; 
+      stroke-linejoin: round; 
+    }
+
+    /* Preview Canvas Area */
+    .preview-container {
+      margin-top: 1.75rem;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 8px;
     }
-    .preview-wrap {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e0e8e0;
-      background: #e8ede8;
-      margin-bottom: 1rem;
-      position: relative;
+
+    .preview-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
+
+    .preview-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+      position: relative;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+    }
+
     canvas {
       display: block;
       width: 100%;
       height: auto;
     }
 
-    /* Footer note */
     .note {
-      font-size: 12px;
-      color: #999;
+      font-size: 0.78rem;
+      color: var(--text-muted);
       text-align: center;
-      line-height: 1.6;
+      margin-top: 1.25rem;
     }
-    .note strong { color: #1a6b2e; }
-
-    /* Badge */
-    .badge {
-      display: inline-block;
-      background: #e8f5ee;
-      color: #1a6b2e;
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 6px;
-      padding: 3px 8px;
-      margin-left: 6px;
-      vertical-align: middle;
-      letter-spacing: 0.3px;
+    
+    .note strong { 
+      color: var(--brand-green); 
+      font-weight: 600;
     }
 
+    /* Mobile Adaptive Breakpoint Handling */
     @media (max-width: 480px) {
-      .card { padding: 1.5rem 1.25rem; }
-      .input-group { flex-direction: column; }
-      .btn-download { width: 100%; justify-content: center; }
-      input[type="text"] { width: 100%; }
+      .card { 
+        padding: 1.5rem 1.25rem; 
+        border-radius: 20px;
+      }
+      .input-group { 
+        flex-direction: column; 
+        gap: 10px;
+      }
+      input[type="text"] { 
+        width: 100%; 
+      }
+      .btn-download { 
+        width: 100%; 
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="card">
-
-  <div class="header">
-    <div class="header-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+<div class="container">
+  <div class="card">
+    
+    <div class="header">
+      <div class="header-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="header-text">
+        <h1>MAC 3.0 DP Engine <span class="badge">FUTMINNA</span></h1>
+        <p>Muslim Academic Conference · June 13, 2026</p>
+      </div>
     </div>
-    <div class="header-text">
-      <h1>MAC 3.0 DP Generator <span class="badge">MSSN FUTMINNA</span></h1>
-      <p>Muslim Academic Conference · Saturday, 13th June 2026</p>
+
+    <div class="form-group">
+      <label for="nameInput">Enter Full Name</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="Sulyman Muhammad Sodiq"
+          maxlength="35"
+          autocomplete="off"
+          oninput="renderDP()"
+        />
+        <button class="btn-download" onclick="downloadDP()">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </button>
+      </div>
     </div>
+
+    <div class="preview-container">
+      <div class="preview-header">
+        <p class="preview-label">Live Preview</p>
+        <span class="badge" style="background: #f3f4f6; color: #6b7280;">1080 × 1080 px</span>
+      </div>
+      <div class="preview-wrap">
+        <canvas id="dpCanvas" width="1080" height="1080"></canvas>
+      </div>
+    </div>
+
+    <p class="note">
+      Generates high-fidelity, crisp <strong>PNG</strong> copies tailored natively for social grids.
+    </p>
+
   </div>
-
-  <label for="nameInput">Your Full Name</label>
-  <div class="input-group">
-    <input
-      type="text"
-      id="nameInput"
-      placeholder="Sulyman Muhammad Sodiq"
-      maxlength="40"
-      autocomplete="off"
-      oninput="renderDP()"
-    />
-    <button class="btn-download" onclick="downloadDP()">
-      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download
-    </button>
-  </div>
-
-  <p class="preview-label">Preview</p>
-  <div class="preview-wrap">
-    <canvas id="dpCanvas" width="1080" height="1080"></canvas>
-  </div>
-
-  <p class="note">
-    Exports as <strong>1080 × 1080 PNG</strong> &mdash; ready for WhatsApp, Instagram, Twitter/X &amp; LinkedIn.
-  </p>
-
 </div>
 
 <script>
@@ -212,7 +311,7 @@
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1080;
 
-  // Exact positions calibrated for your green flyer block
+  // Calibrated layout coordinates targeting center line of green polygon banner
   const BAND_TOP    = 210;
   const BAND_BOTTOM = 430;
   const BAND_MID    = Math.round((BAND_TOP + BAND_BOTTOM) / 2);
@@ -226,28 +325,26 @@
   };
   
   flyer.onerror = () => {
-    // If the file path completely breaks, check if the file is named "OFFICIAL FLYER (1).jpg" on github
     ctx.fillStyle = '#1a6b2e';
     ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 32px Arial';
+    ctx.font = 'bold 32px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('Please make sure your background flyer file name', W / 2, H / 2 - 30);
-    ctx.fillText('matches exactly with the script parameters.', W / 2, H / 2 + 20);
+    ctx.fillText('Background layout configuration mismatch.', W / 2, H / 2);
   };
 
-  /* 👉 ACTION REQUIRED: Change this string if your file in GitHub has a 
-    different name like 'OFFICIAL FLYER (1).jpg' or 'official_flyer.jpg'
+  /* Verify this file parameter perfectly references your target asset file 
+    structure configuration (e.g. 'OFFICIAL FLYER.jpg' or 'OFFICIAL FLYER (1).jpg')
   */
-  flyer.src = 'official_flyer.jpg';
+  flyer.src = 'OFFICIAL FLYER.jpg';
 
   function fitFont(text, maxW, maxH) {
     let size = Math.floor(maxH * 0.42); 
-    ctx.font = `700 ${size}px "Segoe UI", Arial, sans-serif`;
+    ctx.font = `700 ${size}px "Segoe UI", -apple-system, Arial, sans-serif`;
     while (ctx.measureText(text).width > maxW && size > 24) {
       size -= 2;
-      ctx.font = `700 ${size}px "Segoe UI", Arial, sans-serif`;
+      ctx.font = `700 ${size}px "Segoe UI", -apple-system, Arial, sans-serif`;
     }
     return size;
   }
@@ -257,8 +354,6 @@
     const name = raw || 'Sulyman Muhammad Sodiq'; 
 
     ctx.clearRect(0, 0, W, H);
-    
-    // Draw background image template
     ctx.drawImage(flyer, 0, 0, W, H);
 
     const maxW = W * 0.86; 
@@ -267,7 +362,6 @@
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
 
-    // Add typography drop shadow
     ctx.shadowColor   = 'rgba(0,0,0,0.12)';
     ctx.shadowBlur    = 4;
     ctx.shadowOffsetX = 1;
@@ -275,10 +369,10 @@
 
     ctx.fillStyle = '#ffffff';
     
-    // Render name directly inside the green shape baseline
+    // Renders matching typography baseline offset constraints
     ctx.fillText(name, W / 2, BAND_MID + 4);
 
-    // Clean up canvas states
+    // Context clean-down pipeline
     ctx.shadowColor   = 'transparent';
     ctx.shadowBlur    = 0;
     ctx.shadowOffsetX = 0;
